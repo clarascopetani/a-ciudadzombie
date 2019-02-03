@@ -115,33 +115,27 @@ Juego.capturarMovimiento = function(tecla) {
   // El movimiento esta determinado por la velocidad del jugador
   if (tecla == 'izq') {
     movX = -velocidad;
-    Jugador.x--;
-    console.log("movio izquieda", Jugador.x);
   }
   if (tecla == 'arriba') {
     movY = -velocidad;
-    Jugador.y = Jugador.y-movY;
-    console.log("movio arriba", Jugador.y, Jugador.velocidad, movY);
   }
   if (tecla == 'der') {
     movX = velocidad;
-    Jugador.x++;
-    console.log("movio derecha", Jugador.x);
   }
   if (tecla == 'abajo') {
     movY = velocidad;
-    Jugador.y++;
-    console.log("movio abajo", Jugador.y);
   }
 
   // Si se puede mover hacia esa posicion hay que hacer efectivo este movimiento
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
-    /* Aca tiene que estar la logica para mover al jugador invocando alguno de sus metodos  */
-
+    /* Aca tiene que estar la logica para mover al jugador invocando alguno
+    de sus metodos  */
+      
     /* COMPLETAR */
-    
+    Jugador.x = Jugador.x + movX;
+    Jugador.y = Jugador.y + movY;
+    console.log(Jugador.x, Jugador.y, Jugador.velocidad);
   }
-
 };
 
 Juego.dibujar = function() {
@@ -154,10 +148,9 @@ Juego.dibujar = function() {
   /* Aca hay que agregar la logica para poder dibujar al jugador principal
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
-
+  
   /* Completar */
   Dibujante.dibujarEntidad(Jugador);
-
   // Se recorren los obstaculos de la carretera pintandolos
   this.obstaculosCarretera.forEach(function(obstaculo) {
     Dibujante.dibujarEntidad(obstaculo);
