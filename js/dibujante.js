@@ -38,3 +38,4 @@ var Dibujante = {
     ctx.fillRect(x, y, ancho, alto);
   },
 }
+  
