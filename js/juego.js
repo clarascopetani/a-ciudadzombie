@@ -21,12 +21,15 @@ var Juego = {
     /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
     de ejemplo, pero podras agregar muchos mas. */
     new Obstaculo('imagenes/valla_horizontal.png', 130, 70, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 350, 90, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 160, 70, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 770, 200, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 840, 490, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 480, 430, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 130, 450, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 810, 100, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 500, 120, 30, 30, 1),
     /*Autos*/
     new Obstaculo('imagenes/auto_verde_abajo.png', 170, 110, 15, 30, 1),
     new Obstaculo('imagenes/auto_verde_abajo.png', 170, 110, 15, 30, 1),
@@ -55,15 +58,17 @@ var Juego = {
   ],
  // Los enemigos se agregaran en este arreglo.
  enemigos: [
-  new ZombieCaminante("imagenes/zombie1.png",175,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-  new ZombieCaminante("imagenes/zombie1.png",175,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-  new ZombieCaminante('imagenes/zombie2.png',475,450,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-  new ZombieCaminante('imagenes/zombie3.png',150,120,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-  new ZombieCaminante('imagenes/zombie4.png',585,770,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-  new ZombieCaminante('imagenes/zombie4.png',880,600,10,10,1,{desdeX: 480, hastaX: 941, desdeY: 20, hastaY: 600}),
-  new ZombieConductor('imagenes/tren_horizontal.png',400,322,120,40,5,{desdeX: 20, hastaX: 850, desdeY: 0, hastaY: 322},'h'),
-  new ZombieConductor('imagenes/tren_vertical.png',640,0,35,90,5,{desdeY: 0, hastaY: 550},'v'),
-  new ZombieConductor('imagenes/tren_vertical.png',670,0,35,90,3,{desdeY:0, hastaY: 530},'v')
+  new ZombieCaminante("imagenes/zombie1.png",175,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}, 1),
+  new ZombieCaminante('imagenes/zombie2.png',475,450,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}, 1),
+  new ZombieCaminante('imagenes/zombie3.png',585,770,10,10,1,{desdeX: 100, hastaX: 941, desdeY: 20, hastaY: 557}, 1),
+  // Zombie con mas potencia
+  new ZombieCaminante("imagenes/zombie4.png",175,200,18,18,1,{desdeX: 80, hastaX: 941, desdeY: 300, hastaY: 557}, 2),
+  new ZombieCaminante('imagenes/zombie4.png',150,120,18,18,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}, 2),
+  new ZombieCaminante('imagenes/zombie4.png',880,600,18,18,1,{desdeX: 480, hastaX: 941, desdeY: 20, hastaY: 600}, 2),
+  // Trenes
+  new ZombieConductor('imagenes/tren_horizontal.png',400,322,150,40,5,{desdeX: 20, hastaX: 850, desdeY: 0, hastaY: 322},'h', 5),
+  new ZombieConductor('imagenes/tren_vertical.png',640,0,35,90,5,{desdeY: 0, hastaY: 550},'v', 3),
+  new ZombieConductor('imagenes/tren_vertical.png',670,0,35,90,3,{desdeY:0, hastaY: 530},'v', 3)
   ],
 }
 
@@ -91,7 +96,9 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_derecha.png',
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
-    'imagenes/auto_verde_derecha.png'
+    'imagenes/auto_verde_derecha.png',
+    'imagenes/meta.png',
+    'imagenes/Mensaje1.png'
   ]);
   Resources.onReady(this.comenzar.bind(Juego));
 };
@@ -104,6 +111,7 @@ Juego.obstaculos = function() {
 Juego.comenzar = function() {
   // Inicializar el canvas del juego
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
+  
   /* El bucle principal del juego se llamara continuamente para actualizar
   los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
   ataques, colisiones, etc*/
@@ -163,13 +171,11 @@ Juego.dibujar = function() {
   Dibujante.borrarAreaDeJuego();
   //Se pinta la imagen de fondo segun el estado del juego
   this.dibujarFondo();
-  //this.dibujarImagen('/imagenes/meta.png', 760, 530, 125, 35);
-
 
   /* Aca hay que agregar la logica para poder dibujar al jugador principal
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
-  
+ 
   /* Completar */
   Dibujante.dibujarEntidad(Jugador);
 
@@ -191,8 +197,10 @@ Juego.dibujar = function() {
     var x = tamanio * i
     Dibujante.dibujarRectangulo('purple', x, 0, tamanio, 15);
   } 
-  Dibujante.dibujarRectangulo('lightgreen', 759, 555, 130, 10);
+  Dibujante.dibujarImagen('imagenes/meta.png', 759, 520, 130, 40);
+  
 };
+
 
 
 
@@ -216,9 +224,12 @@ Juego.calcularAtaques = function() {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
       /* Si el enemigo colisiona debe empezar su ataque
       COMPLETAR */
+      enemigo.comenzarAtaque(this.jugador);
     } else {
       /* Sino, debe dejar de atacar
       COMPLETAR */
+      enemigo.dejarDeAtacar(this.jugador);
+
     }
   }, this);
 };
