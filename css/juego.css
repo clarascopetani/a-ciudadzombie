@@ -2,6 +2,15 @@ body {
   background-image: url('../imagenes/fondo.png');
 }
 
+.vidasJuego {
+  font-size:20px;
+  color:white;
+  font-family: monospace;
+  position: fixed;
+  top: 0;
+  right:250px;
+}
+
 canvas {
   margin: auto;
   display: flex;
@@ -16,4 +25,9 @@ canvas {
   color: white;
   font-family: monospace;
   visibility: hidden;
+  font-size: 16px;
+}
+
+.ocultar {
+  display: none;
 }

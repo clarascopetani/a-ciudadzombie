@@ -36,6 +36,5 @@ var Dibujante = {
     var ctx = this.canvas.getContext('2d');
     ctx.fillStyle = color;
     ctx.fillRect(x, y, ancho, alto);
-  },
+  }
 }
-  

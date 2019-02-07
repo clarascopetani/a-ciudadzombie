@@ -69,7 +69,7 @@ var Juego = {
   new ZombieConductor('imagenes/tren_horizontal.png',400,322,150,40,5,{desdeX: 20, hastaX: 850, desdeY: 0, hastaY: 322},'h', 5),
   new ZombieConductor('imagenes/tren_vertical.png',640,0,35,90,5,{desdeY: 0, hastaY: 550},'v', 3),
   new ZombieConductor('imagenes/tren_vertical.png',670,0,35,90,3,{desdeY:0, hastaY: 530},'v', 3)
-  ],
+  ]
 }
 
 
@@ -98,7 +98,6 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_verde_abajo.png',
     'imagenes/auto_verde_derecha.png',
     'imagenes/meta.png',
-    'imagenes/Mensaje1.png'
   ]);
   Resources.onReady(this.comenzar.bind(Juego));
 };
@@ -191,18 +190,23 @@ Juego.dibujar = function() {
   });
 
   // El dibujante dibuja las vidas del jugador
-  var tamanio = this.anchoCanvas / this.vidasInicial;
-  Dibujante.dibujarRectangulo('white', 0  , 0, this.anchoCanvas, 15);
+  Dibujante.dibujarRectangulo('#003665', 0, 4, 140, 40);
   for (var i = 0; i < this.jugador.vidas; i++) {
-    var x = tamanio * i
-    Dibujante.dibujarRectangulo('purple', x, 0, tamanio, 15);
+    Dibujante.dibujarImagen('imagenes/auto_rojo_arriba.png', 30*i, 10, 10, 20);
   } 
   Dibujante.dibujarImagen('imagenes/meta.png', 759, 520, 130, 40);
   
 };
 
+// var tamanio = this.anchoCanvas / this.vidasInicial;
+// Dibujante.dibujarRectangulo('white', 0  , 0, this.anchoCanvas, 15);
+// for (var i = 0; i < this.jugador.vidas; i++) {
+//   var x = tamanio * i
+//   Dibujante.dibujarRectangulo('purple', x, 0, tamanio, 15);
+// } 
+// Dibujante.dibujarImagen('imagenes/meta.png', 759, 520, 130, 40);
 
-
+// };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
@@ -210,8 +214,10 @@ una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   /* COMPLETAR */
   this.enemigos.forEach(function(enemigo) {
+  
     /* Completar */
-    enemigo.mover();
+  enemigo.mover();
+
   });
 };
 
@@ -222,19 +228,17 @@ se ven las colisiones con los obstaculos. En este caso sera con los zombies. */
 Juego.calcularAtaques = function() {
   this.enemigos.forEach(function(enemigo) {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
-      /* Si el enemigo colisiona debe empezar su ataque
-      COMPLETAR */
+      
+      /* Si el enemigo colisiona debe empezar su ataque COMPLETAR */
       enemigo.comenzarAtaque(this.jugador);
     } else {
-      /* Sino, debe dejar de atacar
-      COMPLETAR */
+      
+      /* Sino, debe dejar de atacar COMPLETAR */
       enemigo.dejarDeAtacar(this.jugador);
 
     }
   }, this);
 };
-
-
 
 /* Aca se chequea si el jugador se peude mover a la posicion destino.
  Es decir, que no haya obstaculos que se interpongan. De ser asi, no podra moverse */
@@ -303,6 +307,5 @@ document.addEventListener('keydown', function(e) {
     39: 'der',
     40: 'abajo'
   };
-
   Juego.capturarMovimiento(allowedKeys[e.keyCode]);
 });
